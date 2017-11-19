@@ -32,15 +32,15 @@ void readPecStitches(EmbPattern* pattern, EmbFile* file)
             continue;
         }
         /* High bit set means 12-bit offset, otherwise 7-bit signed delta */
-        if(val1 & 0x80)
+        if(val1 & 0x80) // 1xxx  xxxx
         {
-            if(val1 & 0x20) stitchType = TRIM;
-            if(val1 & 0x10) stitchType = JUMP;
-            val1 = ((val1 & 0x0F) << 8) + val2;
+            if(val1 & 0x20) stitchType = TRIM; // 1x1x xxxx
+            if(val1 & 0x10) stitchType = JUMP; // 1xx1 xxxx
+            val1 = ((val1 & 0x0F) << 8) + val2; // 0000 xxxx yyyy yyyy
 
             /* Signed 12-bit arithmetic */
-            if(val1 & 0x800)
-            {
+            if(val1 & 0x800) // 0000 1xxx yyyy yyyy
+            {                // 0001 0000 0000 0000
                 val1 -= 0x1000;
             }
 
