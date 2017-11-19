@@ -9,7 +9,7 @@ struct StitchBlock
     IThread Thread { get; set; }
     double Angle { get; set; }
     List<VectorStitch> Stitches { get; set; }
-}
+};
 
 double LineLength(EmbPoint a1, EmbPoint a2)
 {
